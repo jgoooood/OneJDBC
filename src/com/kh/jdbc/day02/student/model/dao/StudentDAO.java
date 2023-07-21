@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kh.jdbc.day01.student.model.vo.Student;
+import com.kh.jdbc.day02.student.model.vo.Student;
 
 //DAO : DB의 데이터를 객체화 함->VO에 넘겨주어야 함
 public class StudentDAO {

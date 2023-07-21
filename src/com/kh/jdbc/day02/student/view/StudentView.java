@@ -3,8 +3,8 @@ package com.kh.jdbc.day02.student.view;
 import java.util.List;
 import java.util.Scanner;
 
-import com.kh.jdbc.day01.student.controller.StudentController;
-import com.kh.jdbc.day01.student.model.vo.Student;
+import com.kh.jdbc.day02.student.controller.StudentController;
+import com.kh.jdbc.day02.student.model.vo.Student;
 
 //컨트롤러 정보요청
 public class StudentView {
