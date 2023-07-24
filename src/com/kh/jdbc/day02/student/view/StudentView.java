@@ -114,26 +114,6 @@ public class StudentView {
 	
 	
 
-	private Student modifyStudent() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("===== 학생 정보 수정 =====");
-		System.out.print("아이디 : ");
-		String studentId = sc.next();
-		System.out.print("비밀번호 : ");
-		String studentPW = sc.next();
-		System.out.print("이메일 : ");
-		String email = sc.next();
-		System.out.print("전화번호 : ");
-		String phone = sc.next();
-		System.out.print("주소 : ");
-		sc.nextLine(); 
-		String address = sc.nextLine();
-		System.out.print("취미(,로 구분) : ");
-		String hobby = sc.next();
-		Student student = new Student(studentId, studentPW, email, phone, address, hobby);
-		return student;
-	}
-
 	private String inputStudentName() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("======= 학생 이름으로 조회 =======");
@@ -174,6 +154,26 @@ public class StudentView {
 		String hobby = sc.next();
 		Student student = new Student(studentId, studentPW, studentName, gender, age, email, phone, address, hobby);
 		//set메소드로 저장하지 않고 생성자의 매개변수로 데이터를 저장함
+		return student;
+	}
+
+	private Student modifyStudent() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("===== 학생 정보 수정 =====");
+		System.out.print("아이디 : ");
+		String studentId = sc.next();
+		System.out.print("비밀번호 : ");
+		String studentPW = sc.next();
+		System.out.print("이메일 : ");
+		String email = sc.next();
+		System.out.print("전화번호 : ");
+		String phone = sc.next();
+		System.out.print("주소 : ");
+		sc.nextLine(); 
+		String address = sc.nextLine();
+		System.out.print("취미(,로 구분) : ");
+		String hobby = sc.next();
+		Student student = new Student(studentId, studentPW, email, phone, address, hobby);
 		return student;
 	}
 
