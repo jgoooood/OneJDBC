@@ -36,7 +36,7 @@ public class StudentView {
 					//이름으로 입력받는 메소드
 					studentName = inputStdName();
 					sList = controller.selectAllByName(studentName);
-					printStudentById(student);
+					printAllStudent(sList);
 					break;
 				case 4: 
 					//학생정보등록
