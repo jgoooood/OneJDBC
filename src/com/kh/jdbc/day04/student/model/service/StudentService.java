@@ -1,6 +1,7 @@
 package com.kh.jdbc.day04.student.model.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.kh.jdbc.day04.student.common.JDBCTemplate;
@@ -24,8 +25,14 @@ public class StudentService {
 	}
 
 	public List<Student> selectAll() {
-		Connection conn = jdbcTemplate.createConnection();
-		List<Student> sList = sDao.selectAll(conn);
+		List<Student> sList = null;
+		try {
+			Connection conn = jdbcTemplate.createConnection();
+			sList = sDao.selectAll(conn);
+			jdbcTemplate.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		jdbcTemplate.close();
 		return sList;
 	}
@@ -44,16 +51,16 @@ public class StudentService {
 		return sList;
 	}
 
-	public int deleteStudent(String studentId) {
-		Connection conn = jdbcTemplate.createConnection();
-		int result = sDao.deleteStudent(conn, studentId);
-		jdbcTemplate.close();
-		return result;
-	}
-
 	public int insertStudent(Student student) {
+		//트랜잭션처리하기 위해서는 오토커밋을 풀고 수동으로 커밋
 		Connection conn = jdbcTemplate.createConnection();
 		int result = sDao.insertStudent(conn, student);
+		result += sDao.updateStudent(conn, student); //결과값 계속 쌓기
+		if(result > 1) { // 트랜잭션처리->예외발생안하면 commit
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		jdbcTemplate.close();
 		return result;
 	}
@@ -61,6 +68,23 @@ public class StudentService {
 	public int updateStudent(Student student) {
 		Connection conn = jdbcTemplate.createConnection();
 		int result = sDao.updateStudent(conn, student);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		jdbcTemplate.close();
+		return result;
+	}
+
+	public int deleteStudent(String studentId) {
+		Connection conn = jdbcTemplate.createConnection();
+		int result = sDao.deleteStudent(conn, studentId);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		jdbcTemplate.close();
 		return result;
 	}
